@@ -1,0 +1,20 @@
+.marign{
+    margin: 2px;
+    padding: 2px;
+}
+
+
+.btn{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.structure{
+    display: flex;
+    justify-content:left;
+}
+
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+    margin-left: 16px;
+  }
