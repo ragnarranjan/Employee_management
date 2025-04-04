@@ -27,13 +27,16 @@ export class AppComponent implements OnInit, AfterViewInit {
     'email',
     'date_of_birth',
     'gender',
+    'actions'
   ];
   dataSource!: MatTableDataSource<UserData>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _dialog: MatDialog, private getemps: EmployeeService) {}
+  constructor(private _dialog: MatDialog,
+               private getemps: EmployeeService
+      ) {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<UserData>([]);
@@ -68,4 +71,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   openAddEditForm() {
     this._dialog.open(AddEditComponentComponent);
   }
+
+  editEmployee(data:any)
+  {
+    this._dialog.open(AddEditComponentComponent,{
+      data
+    });
+
+}
+
 }

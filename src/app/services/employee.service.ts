@@ -20,4 +20,15 @@ export class EmployeeService {
   getEmployees(): Observable<any[]> {
     return this.http.get<any[]>(this.url);
   }
+
+
+  showall():Observable<any>{
+      return this.http.get(this.url)
+  }
+
+
+// showall():Observable<any>{
+//   return this.http.get(this.url)
+// }
+
 }

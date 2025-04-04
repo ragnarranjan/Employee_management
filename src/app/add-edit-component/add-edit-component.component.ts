@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup,Validators  } from '@angular/forms';
 import { DialogRef } from '@angular/cdk/dialog';
 import { EmployeeService } from '../services/employee.service';
 import { HttpClientModule } from '@angular/common/http';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -16,12 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './add-edit-component.component.html',
   styleUrls: ['./add-edit-component.component.scss']
 })
-export class AddEditComponentComponent {
+export class AddEditComponentComponent implements OnInit {
 
   empform :FormGroup;
 
   constructor(private _fb: FormBuilder, private dialogRef:DialogRef<AddEditComponentComponent>,
-          private empservice : EmployeeService)
+          private empservice : EmployeeService,@Inject (MAT_DIALOG_DATA) public data:any)
           {
             this.empform = this._fb.group({
                 first_name: ['', Validators.required],
@@ -31,10 +32,14 @@ export class AddEditComponentComponent {
                 gender: ['', Validators.required]
             });
   }
+  ngOnInit(): void {
+    this.empform.patchValue(this.data);
+  }
 
 
   OnformSubmit() {
-    if (this.empform.valid) {
+    if (this.empform.valid) 
+      {
       let empformdata = this.empform.value;
       this.empservice.addemployee(empformdata).subscribe({
         next:(res) =>{
